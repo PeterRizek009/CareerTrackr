@@ -1,26 +1,7 @@
-import { useEffect } from 'react'
 import JobsTable from '../components/jobsTable'
-import { useJobContext } from '../hooks/useJobContext'
 
-const Home = () => {
 
-    const { jobs, dispatch } = useJobContext()
-
-   
-
-    useEffect(() => {
-        const fetchJobs = async () => {
-            const response = await fetch('/api');
-            const JobData = await response.json();
-            if (response.ok) {
-
-                dispatch({ type: 'SET_JOBS', payload: JobData })
-
-            }
-        }
-        fetchJobs()
-    }, [])
-
+const Home = ({ jobs }) => {
 
 
     return (

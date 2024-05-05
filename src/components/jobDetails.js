@@ -1,0 +1,126 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useJobContext } from "../hooks/useJobContext";
+
+
+const JobDetails = ({ jobs }) => {
+
+    const { id } = useParams();
+
+    const [positionName, setPositionName] = useState('')
+    const [companyName, setCompanyName] = useState('')
+    const [location, setLocation] = useState('')
+    const [platform, setPlatform] = useState('')
+    const [gotAnReply, setGotAnReply] = useState()
+    const [jobData, setJobData] = useState(null);
+    const { dispatch } = useJobContext()
+
+
+
+
+    useEffect(() => {
+        const selectedJob = jobs.find((el) => el._id === id);
+        if (selectedJob) {
+            setJobData(selectedJob);
+        }
+    }, [jobs, id]);
+
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // Implement logic to update the job data using API
+
+        const job = { positionName, companyName, location, platform, gotAnReply }
+
+
+        try {
+            const response = await fetch(`/api/${id}`, {
+                method: 'PATCH',
+                body: JSON.stringify(job),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update Job');
+            }
+
+            const newJobData = await response.json();
+            dispatch({ type: 'UPDATE_JOB', payload: newJobData });
+
+
+            // Reset form fields after successful submission
+        } catch (error) {
+            console.error('Error adding job:', error);
+            alert('Failed to add job');
+        }
+
+    };
+
+
+
+
+    if (!jobData) {
+        return <div>Loading...</div>;
+    }
+
+    return (
+
+        <div>
+
+            <form className="max-w-sm mx-auto mt-8" onSubmit={handleSubmit}>
+                <div className="mb-5">
+                    <label htmlFor="positionName" className="block mb-2 text-sm font-medium text-gray-700 ">Position name</label>
+                    <input type="text" id="positionName" name="Position" value={positionName || jobData.positionName} onChange={(e) => setPositionName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                </div>
+                <div className="mb-5">
+                    <label htmlFor="companyName" className="block mb-2 text-sm font-medium text-gray-700 ">Company</label>
+                    <input type="text" id="companyName" name="Company" value={companyName || jobData.companyName} onChange={(e) => setCompanyName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                </div>
+
+                <div className="mb-5">
+                    <label htmlFor="Location" className="block mb-2 text-sm font-medium text-gray-700 ">Location</label>
+                    <input type="text" id="Location" name="Location" value={location || jobData.location} onChange={(e) => setLocation(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                </div>
+
+                <div className="mb-5">
+                    <label htmlFor="Location" className="block mb-2 text-sm font-medium text-gray-700 ">Platform</label>
+                    <input type="text" id="Location" name="Location" value={platform || jobData.platform} onChange={(e) => setPlatform(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                </div>
+
+                <div className="mb-5">
+                    <label htmlFor="optionSelect" className="block mb-2 text-sm font-medium text-gray-700 ">Company Replay</label>
+                    <select
+                        id="optionSelect"
+                        name="Option"
+                        value={gotAnReply || jobData.gotAnReply}
+                        onChange={(e) => setGotAnReply(e.target.value)}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        required
+                    >
+                        <option value="">Choose thge suitable reply</option>
+                        <option value={false}>Nothing yet</option>
+                        <option value={true}>Positive Email</option>
+                        <option value={true}>Interview date</option>
+                    </select>
+                </div>
+
+
+                <button type="submit" className="text-white mx-3 bg-gray-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                >
+                    Save
+                </button>
+
+
+
+            </form>
+
+
+        </div >
+    )
+
+}
+
+export default JobDetails;

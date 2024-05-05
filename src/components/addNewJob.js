@@ -2,18 +2,16 @@ import { useState } from "react";
 import { useJobContext } from "../hooks/useJobContext";
 
 
-const AddNewJob = () => {
+const AddNewJob = ({closeModal}) => {
 
     const { dispatch } = useJobContext()
-
-
 
 
     const [positionName, setPositionName] = useState('')
     const [companyName, setCompanyName] = useState('')
     const [location, setLocation] = useState('')
     const [platform, setPlatform] = useState('')
-    const [gotAnReplay, setGotAnReplay] = useState(false)
+    const [gotAnReply, setGotAnReply] = useState(false)
 
 
 
@@ -21,8 +19,8 @@ const AddNewJob = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const job = { positionName, companyName, location, platform, gotAnReply }
 
-        const job = { positionName, companyName, location,platform, gotAnReplay }
         try {
             const response = await fetch('/api', {
                 method: 'POST',
@@ -42,8 +40,9 @@ const AddNewJob = () => {
                 setCompanyName('');
                 setLocation('');
                 setPlatform('');
-                setGotAnReplay('');
+                setGotAnReply('');
                 dispatch({ type: 'ADD_NEW_JOB', payload: newJobData });
+                closeModal()
             }
 
             // Reset form fields after successful submission
@@ -52,7 +51,12 @@ const AddNewJob = () => {
             console.error('Error adding job:', error);
             alert('Failed to add job');
         }
+
+
     };
+
+
+
 
     // const handleChange = (e) => {
     //     const { name, value } = e.target;
@@ -61,7 +65,6 @@ const AddNewJob = () => {
     //         [name]: value
     //     }));
     // };
-
 
 
     return (
@@ -91,22 +94,26 @@ const AddNewJob = () => {
                 <select
                     id="optionSelect"
                     name="Option"
-                    value={gotAnReplay}
-                    onChange={(e) => setGotAnReplay(e.target.value)}
+                    value={gotAnReply}
+                    onChange={(e) => setGotAnReply(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     required
                 >
-                    <option value="">Did you get a replay</option>
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
+                    <option value="">Choose thge suitable reply</option>
+                    <option value={false}>Nothing yet</option>
+                    <option value={true}>Positive Email</option>
+                    <option value={true}>Interview date</option>
                 </select>
             </div>
 
 
-            <button type="submit" className="text-white bg-gray-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            <button type="submit" className="text-white mx-3 bg-gray-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
             >
                 Add New Job
             </button>
+
+
+
         </form>
 
 

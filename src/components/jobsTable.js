@@ -3,18 +3,36 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { MdAdd } from "react-icons/md";
 import { useState } from "react";
 import { useJobContext } from "../hooks/useJobContext";
+import AddNewJob from './addNewJob';
+import Modal from "./modal";
 
 
 
 const JobsTable = ({ jobs }) => {
 
+
+    const [isOpen, setIsOpen] = useState(false);
+
+
+    const openModal = () => {
+        console.log(isOpen);
+        setIsOpen(true);
+    };
+
+    const closeModal = () => {
+        console.log(isOpen);
+        setIsOpen(false)
+
+    };
+
     const [selectedJobId, setSelectedJobId] = useState(null);
+
 
     const { dispatch } = useJobContext()
 
-    const handleSelectChange = (event, jobId) => {
+    const handleSelectChange = (event , jobId) => {
         setSelectedJobId(jobId);
-
+       
     };
 
     const handleDelete = async () => {
@@ -55,9 +73,12 @@ const JobsTable = ({ jobs }) => {
                         <RiDeleteBin5Line />
                     </button>
 
-                    <Link to='/addnewjob' className="text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400 md:text-xl shadow-md rounded-md  md:p-3 mx-4 hover:text-white p-2 hover:border-white" >
+                    <button onClick={openModal} className="text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400 md:text-xl shadow-md rounded-md  md:p-3 mx-4 hover:text-white p-2 hover:border-white" >
                         <MdAdd />
-                    </Link>
+                    </button>
+                    <Modal isOpen={isOpen} closeModal={closeModal}  >
+                        <AddNewJob closeModal={closeModal} />
+                    </Modal>
 
                 </div>
             </div>
@@ -79,7 +100,7 @@ const JobsTable = ({ jobs }) => {
                                 Location
                             </th>
                             <th scope="col" className="p-4">
-                                Platform 
+                                Platform
                             </th>
 
                             <th scope="col" className="p-4">
@@ -127,11 +148,11 @@ const JobsTable = ({ jobs }) => {
                                 </td>
 
                                 <td className="p-4">
-                                    {job.gotAnReplay ? "Got replay" : "No replay"}
+                                    {job.gotAnReply ? "Got reply" : "No reply yet"}
 
                                 </td>
                                 <td className="p-4 text-center">
-                                    <Link to='' className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                    <Link to={`/jobDetails/${job._id}`}  className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                         Edit
                                     </Link>
                                 </td>

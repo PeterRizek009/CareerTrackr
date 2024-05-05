@@ -17,7 +17,19 @@ export const jobReducer = (state, action) => {
         case 'DELETE_JOB':
             return {
                 ...state,
-                jobs : state.jobs.filter((job) => job._id !== action.payload._id)
+                jobs: state.jobs.filter((job) => job._id !== action.payload._id)
+            };
+        case 'UPDATE_JOB':
+            const updatedJobIndex = state.jobs.findIndex(job => job._id === action.payload._id);
+            if (updatedJobIndex === -1) {
+                // Job not found, return state as is
+                return state;
+            }
+            const updatedJobs = [...state.jobs];
+            updatedJobs[updatedJobIndex] = action.payload;
+            return {
+                ...state,
+                jobs: updatedJobs
             };
         default:
             return state;
