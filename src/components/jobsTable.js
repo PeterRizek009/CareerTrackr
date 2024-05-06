@@ -148,7 +148,7 @@ const JobsTable = ({ jobs }) => {
                                 </td>
 
                                 <td className="p-4">
-                                    {job.gotAnReply ? "Got reply" : "No reply yet"}
+                                    {job.gotAnReply}
 
                                 </td>
                                 <td className="p-4 text-center">

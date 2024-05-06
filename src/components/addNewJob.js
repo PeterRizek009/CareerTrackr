@@ -100,9 +100,11 @@ const AddNewJob = ({closeModal}) => {
                     required
                 >
                     <option value="">Choose thge suitable reply</option>
-                    <option value={false}>Nothing yet</option>
-                    <option value={true}>Positive Email</option>
-                    <option value={true}>Interview date</option>
+                    <option value={'Nothing yet'}>Nothing yet</option>
+                    <option value={'Rejection Email'}>Rejection Email</option>
+                    <option value={'Positive Email'}>Positive Email</option>
+                    <option value={'Call form HR'}>got a Call</option>
+                    <option value={'Interview date'}>Interview date</option>
                 </select>
             </div>
 

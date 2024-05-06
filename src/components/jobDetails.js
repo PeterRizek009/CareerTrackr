@@ -7,10 +7,7 @@ const JobDetails = ({ jobs }) => {
 
     const { id } = useParams();
 
-    const [positionName, setPositionName] = useState('')
-    const [companyName, setCompanyName] = useState('')
-    const [location, setLocation] = useState('')
-    const [platform, setPlatform] = useState('')
+
     const [gotAnReply, setGotAnReply] = useState()
     const [jobData, setJobData] = useState(null);
     const { dispatch } = useJobContext()
@@ -22,6 +19,7 @@ const JobDetails = ({ jobs }) => {
         const selectedJob = jobs.find((el) => el._id === id);
         if (selectedJob) {
             setJobData(selectedJob);
+            setGotAnReply(selectedJob.gotAnReply);
         }
     }, [jobs, id]);
 
@@ -31,13 +29,13 @@ const JobDetails = ({ jobs }) => {
         e.preventDefault();
         // Implement logic to update the job data using API
 
-        const job = { positionName, companyName, location, platform, gotAnReply }
+
 
 
         try {
             const response = await fetch(`/api/${id}`, {
                 method: 'PATCH',
-                body: JSON.stringify(job),
+                body: JSON.stringify({ ...jobData, gotAnReply }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -62,63 +60,72 @@ const JobDetails = ({ jobs }) => {
 
 
 
+
     if (!jobData) {
         return <div>Loading...</div>;
     }
 
     return (
-
-        <div>
-
-            <form className="max-w-sm mx-auto mt-8" onSubmit={handleSubmit}>
+        <>
+            <div className="max-w-sm mx-auto mt-8">
                 <div className="mb-5">
                     <label htmlFor="positionName" className="block mb-2 text-sm font-medium text-gray-700 ">Position name</label>
-                    <input type="text" id="positionName" name="Position" value={positionName || jobData.positionName} onChange={(e) => setPositionName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                    <p type="text" name="Position" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" >
+                        {jobData.positionName}
+                    </p>
                 </div>
                 <div className="mb-5">
                     <label htmlFor="companyName" className="block mb-2 text-sm font-medium text-gray-700 ">Company</label>
-                    <input type="text" id="companyName" name="Company" value={companyName || jobData.companyName} onChange={(e) => setCompanyName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                    <p type="text" id="companyName" name="Company" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" >
+                        {jobData.companyName}
+                    </p>
                 </div>
 
                 <div className="mb-5">
                     <label htmlFor="Location" className="block mb-2 text-sm font-medium text-gray-700 ">Location</label>
-                    <input type="text" id="Location" name="Location" value={location || jobData.location} onChange={(e) => setLocation(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                    <p type="text" id="companyName" name="Company" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" >
+                        {jobData.location}
+                    </p>
                 </div>
 
                 <div className="mb-5">
                     <label htmlFor="Location" className="block mb-2 text-sm font-medium text-gray-700 ">Platform</label>
-                    <input type="text" id="Location" name="Location" value={platform || jobData.platform} onChange={(e) => setPlatform(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                    <p type="text" id="companyName" name="Company" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" >
+                        {jobData.platform}
+                    </p>
                 </div>
 
-                <div className="mb-5">
+            </div >
+            <div className="mb-5">
+                <form className="max-w-sm mx-auto mt-8" onSubmit={handleSubmit}>
                     <label htmlFor="optionSelect" className="block mb-2 text-sm font-medium text-gray-700 ">Company Replay</label>
                     <select
                         id="optionSelect"
                         name="Option"
-                        value={gotAnReply || jobData.gotAnReply}
+                        value={gotAnReply}
                         onChange={(e) => setGotAnReply(e.target.value)}
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        required
+
                     >
                         <option value="">Choose thge suitable reply</option>
-                        <option value={false}>Nothing yet</option>
-                        <option value={true}>Positive Email</option>
-                        <option value={true}>Interview date</option>
+                        <option value={'Nothing yet'}>Nothing yet</option>
+                        <option value={'Rejection Email'}>Rejection Email</option>
+                        <option value={'Positive Email'}>Positive Email</option>
+                        <option value={'Call form HR'}>got a Call</option>
+                        <option value={'Interview date'}>Interview date</option>
                     </select>
-                </div>
-
-
-                <button type="submit" className="text-white mx-3 bg-gray-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-                >
-                    Save
-                </button>
 
 
 
-            </form>
+                    <button type="submit" className="text-white mx-3 mt-5 bg-gray-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                    >
+                        Save
+                    </button>
+                </form >
+            </div >
 
+        </>
 
-        </div >
     )
 
 }
