@@ -34,9 +34,14 @@ const Landing = ({
         >
             <ScrollAnimationWrapper>
                 <motion.div
-                    className="flex justify-between items-center "
+                    className="container mx-auto flex flex-col items-center justify-center md:flex-row md:items-center"
                     variants={scrollAnimation}>
-                    <div className=" flex flex-col justify-center items-start row-start-2 sm:row-start-1">
+                    <div className="md:w-1/2 md:order-2">
+                        <motion.div className="h-full w-full" variants={scrollAnimation}>
+                            <img src={headerImage} alt="header" className="mx-auto md:mx-0 w-full md:max-w-md" />
+                        </motion.div>
+                    </div>
+                    <div className="md:w-1/2 md:order-1 text-left md:mx-0 mx-10">
                         <h1 className="text-2xl lg:text-3xl xl:text-4xl font-medium text-gray-800 leading-normal py-2">
                             Effortlessly Manage Your Job Applications, From Submission to Success!..
                         </h1>
@@ -44,15 +49,11 @@ const Landing = ({
                             Welcome to Job Trackr, your comprehensive solution for effortlessly managing your job applications,
                             empowering your career journey with insightful analytics and personalized recommendations.
                         </p>
-                        <Link to="/home" className='bg-red-400 text-gray-100 rounded-lg p-[10px] hover:bg-gray-600 transition-all '>Get Started</Link>
+                        <Link to="/home" className='button-primary'>Get Started</Link>
                     </div>
-                    <div className="flex w-full">
-                        <motion.div className="h-full w-full" variants={scrollAnimation}>
-                            <img src={headerImage} alt="header" className="w-[500px] h-[400px] mx-8"
 
-                            />
-                        </motion.div>
-                    </div>
+
+
                 </motion.div>
             </ScrollAnimationWrapper>
             <div className="relative w-full flex">
