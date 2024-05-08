@@ -1,4 +1,6 @@
+
 import JobsTable from '../components/jobsTable'
+
 
 
 const Home = ({ jobs }) => {

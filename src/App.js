@@ -1,11 +1,12 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import Home from './pages/home'
 import Navbar from './components/navbar';
 import './App.css';
 import AddNewJob from './components/addNewJob';
 import JobDetails from './components/jobDetails';
 import { useJobContext } from './hooks/useJobContext';
 import { useEffect } from 'react';
+import Landing from './pages/landingpage';
+import Home from './pages/home';
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
       }
     }
     fetchJobs()
-  }, [])
+  }, [dispatch])
 
 
   return (
@@ -32,7 +33,8 @@ function App() {
         <Navbar />
         <div className='pages'>
           <Routes>
-            <Route path='/' element={<Home jobs={jobs} />} />
+          <Route path='/' element={<Landing/>} />
+            <Route path='/home' element={<Home jobs={jobs} />} />
             <Route path='/addnewjob' element={<AddNewJob />} />
             <Route path='/jobDetails/:id' element={<JobDetails jobs={jobs} />} />
           </Routes>
