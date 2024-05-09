@@ -30,9 +30,9 @@ const JobsTable = ({ jobs }) => {
 
     const { dispatch } = useJobContext()
 
-    const handleSelectChange = (event , jobId) => {
+    const handleSelectChange = (event, jobId) => {
         setSelectedJobId(jobId);
-       
+
     };
 
     const handleDelete = async () => {
@@ -58,14 +58,20 @@ const JobsTable = ({ jobs }) => {
     };
 
 
+    const tableHead = [
+        "Select", "Position", "Company", "Location", "Platform", "Time & Date", "Company Replay", "Edit"
+    ]
+
 
     return (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
             <div className="flex justify-between items-center w-full dark:bg-gray-800 text-gray-900 bg-white dark:text-white ">
 
                 <h1 className="p-3 text-lg font-semibold text-left rtl:text-right sm:mx-4">
                     Jobs Details
-                    <p className="mt-1 md:text-sm font-normal text-gray-500 dark:text-gray-400 text-xs">Effortlessly Manage Your Job Applications: From Submission to Success!.</p>
+                    <p className="mt-1 md:text-sm font-normal text-gray-500 dark:text-gray-400 text-xs">
+                        Effortlessly Manage Your Job Applications: From Submission to Success!.
+                    </p>
                 </h1>
 
                 <div className="btns flex justify-start">
@@ -83,36 +89,19 @@ const JobsTable = ({ jobs }) => {
                 </div>
             </div>
 
+
             <div className="table-wrapper overflow-x-auto ">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" className="p-5">
-                                Select
-                            </th>
-                            <th scope="col" className="p-5">
-                                Position
-                            </th>
-                            <th scope="col" className="p-4">
-                                Company
-                            </th>
-                            <th scope="col" className="p-4">
-                                Location
-                            </th>
-                            <th scope="col" className="p-4">
-                                Platform
-                            </th>
+                            {tableHead.map((el) => (
+                                <th scope="col" className="p-5" key={el}>
+                                    {el}
+                                </th>
+                            ))}
 
-                            <th scope="col" className="p-4">
-                                Date & Time
-                            </th>
 
-                            <th scope="col" className="p-4">
-                                Company Replay
-                            </th>
-                            <th scope="col" className="p-4 text-center">
-                                Edit
-                            </th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -151,8 +140,8 @@ const JobsTable = ({ jobs }) => {
                                     {job.gotAnReply}
 
                                 </td>
-                                <td className="p-4 text-center">
-                                    <Link to={`/jobDetails/${job._id}`}  className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                <td className="p-4">
+                                    <Link to={`/jobDetails/${job._id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                         Edit
                                     </Link>
                                 </td>

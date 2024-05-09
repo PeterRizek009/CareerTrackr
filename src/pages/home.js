@@ -7,7 +7,7 @@ const Home = ({ jobs }) => {
 
 
     return (
-        <div className="home min-h-[100vh] mx-auto  w-[100%]  md:p-[40px] p-3  mt-4">
+        <div className="home min-h-[100vh] mx-auto container  md:p-[40px] p-3  mt-4">
             <JobsTable jobs={jobs} />
         </div>
     )
