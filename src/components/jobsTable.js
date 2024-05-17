@@ -64,7 +64,7 @@ const JobsTable = ({ jobs }) => {
 
 
     return (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-screen-xl mx-auto">
             <div className="flex justify-between items-center w-full dark:bg-gray-800 text-gray-900 bg-white dark:text-white ">
 
                 <h1 className="p-3 text-lg font-semibold text-left rtl:text-right sm:mx-4">
@@ -75,13 +75,14 @@ const JobsTable = ({ jobs }) => {
                 </h1>
 
                 <div className="btns flex justify-start">
-                    <button onClick={handleDelete} className="text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400 md:text-xl shadow-md rounded-md  md:p-3 mx-2 hover:text-white p-2 hover:border-white">
+                    <button onClick={handleDelete} className="text-gray-700   bg-gray-700 dark:text-gray-400 md:text-xl shadow-md rounded-md  md:p-3 mx-2 hover:text-white p-2 hover:border-white">
                         <RiDeleteBin5Line />
                     </button>
 
-                    <button onClick={openModal} className="text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400 md:text-xl shadow-md rounded-md  md:p-3 mx-4 hover:text-white p-2 hover:border-white" >
+                    <button onClick={openModal} className="text-gray-700   bg-gray-700 dark:text-gray-400 md:text-xl shadow-md rounded-md  md:p-3 mx-4 hover:text-white p-2 hover:border-white" >
                         <MdAdd />
                     </button>
+
                     <Modal isOpen={isOpen} closeModal={closeModal}  >
                         <AddNewJob closeModal={closeModal} />
                     </Modal>
@@ -99,14 +100,11 @@ const JobsTable = ({ jobs }) => {
                                     {el}
                                 </th>
                             ))}
-
-
-
                         </tr>
                     </thead>
                     <tbody>
                         {jobs && jobs.map((job) => (
-                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={job._id}>
+                            <tr className="text-black border-b bg-gray-200 border-red-400" key={job._id}>
                                 <td className="p-6">
                                     <input
                                         type="checkbox"
@@ -115,7 +113,7 @@ const JobsTable = ({ jobs }) => {
                                         onChange={(event) => handleSelectChange(event, job._id)}
                                     />
                                 </td>
-                                <th scope="row" className="p-4 font-medium text-gray-400 whitespace-nowrap dark:text-white" >
+                                <th scope="row" className="p-4 font-medium" >
                                     {job.positionName}
                                 </th>
                                 <td className="p-4">
@@ -141,7 +139,7 @@ const JobsTable = ({ jobs }) => {
 
                                 </td>
                                 <td className="p-4">
-                                    <Link to={`/jobDetails/${job._id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                    <Link to={`/jobDetails/${job._id}`} className="font-medium p-3 bg-gray-300 hover:shadow-md">
                                         Edit
                                     </Link>
                                 </td>

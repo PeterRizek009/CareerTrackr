@@ -18,7 +18,7 @@ const Feature = () => {
 
     return (
 
-        <div className="max-w-screen-xl my-8 px-4 xl:px-8 mx-auto md:h-[600px]">
+        <div className="max-w-screen-xl my-8 px-4 xl:px-8 mx-auto md:h-[600px] h-[800px]">
             <ScrollAnimationWrapper>
                 <div className="container mx-auto flex flex-col items-center md:flex-row  justify-center">
 
@@ -28,7 +28,6 @@ const Feature = () => {
                             <img src={featureImage} alt="header" className="mx-auto md:mx-0 w-full  md:max-w-lg" />
                         </motion.div>
                     </div>
-
 
 
 

@@ -1,10 +1,6 @@
-
 import JobsTable from '../components/jobsTable'
 
-
-
 const Home = ({ jobs }) => {
-
 
     return (
         <div className="home min-h-[100vh] mx-auto container  md:p-[40px] p-3  mt-4">
