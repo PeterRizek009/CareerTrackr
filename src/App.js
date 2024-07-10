@@ -39,6 +39,7 @@ return (
       <div className='pages'>
         <Routes>
           <Route path='/' element={<Landing />} />
+          <Route path='/CareerTrackr/' element={<Landing />} />
           <Route path="/login" element={<GoogleLoginPage />} />
           <Route path='/home' element={<Home jobs={jobs} />} />
           <Route path='/addnewjob' element={<AddNewJob />} />
