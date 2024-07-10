@@ -7,7 +7,7 @@ const AddNewJob = ({ closeModal }) => {
     const { dispatch } = useJobContext()
 
 
-   
+
     const [positionName, setPositionName] = useState('')
     const [companyName, setCompanyName] = useState('')
     const [location, setLocation] = useState('')
@@ -16,11 +16,16 @@ const AddNewJob = ({ closeModal }) => {
 
 
 
+
     // handleSubmit 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+
 
         const job = { positionName, companyName, location, platform, gotAnReply }
+
+
 
         try {
             const response = await fetch('/api', {
@@ -44,6 +49,7 @@ const AddNewJob = ({ closeModal }) => {
                 setGotAnReply('');
                 dispatch({ type: 'ADD_NEW_JOB', payload: newJobData });
                 closeModal()
+               
             }
             // Reset form fields after successful submission
         } catch (error) {
@@ -57,7 +63,7 @@ const AddNewJob = ({ closeModal }) => {
     return (
 
         <form className="max-w-lg mx-auto mt-8" onSubmit={handleSubmit}>
-            
+
             <div className="mb-5">
                 <label htmlFor="positionName" className="label">Position name</label>
                 <input type="text" id="positionName" name="Position" value={positionName} onChange={(e) => setPositionName(e.target.value)} className="input" required />
@@ -97,8 +103,7 @@ const AddNewJob = ({ closeModal }) => {
             </div>
 
 
-            <button type="submit" className="button-primary mt-4"
-            >
+            <button type="submit" className="button-primary mt-4">
                 Add New Job
             </button>
 

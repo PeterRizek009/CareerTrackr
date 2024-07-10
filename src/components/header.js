@@ -13,7 +13,7 @@ const Header = () => {
     const scrollAnimation = useMemo(() => getScrollAnimation(), []);
 
     return (
-        <div className="max-w-screen-xl my-8 px-4 xl:px-8 mx-auto">
+        <div className="max-w-screen-xl my-8 px-4 xl:px-8 mx-auto md:h-[600px] ">
             <ScrollAnimationWrapper>
                 <motion.div
                     className="container mx-auto flex flex-col items-center justify-center md:flex-row md:items-center"

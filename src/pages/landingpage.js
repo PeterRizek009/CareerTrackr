@@ -2,21 +2,26 @@ import React from "react";
 import Header from "../components/header";
 import Feature from "../components/feature";
 import Banner from "../components/banner";
-import Testimoni from "../components/testmonis";
+import Stats from "../components/stats";
+
+
 
 
 const Landing = () => {
 
-
     return (
         <div>
             <Header />
-
-            <div className="w-full my-8 bg-gray-200">
+            <div className="w-full my-8 bg-gray-100">
                 <Feature />
             </div>
-            <Testimoni />
-            {/* <Banner /> */}
+
+            <div className="w-full my-8 bg-white">
+                <Stats />
+            </div>
+            <Banner />
+
+
         </div>
     );
 };

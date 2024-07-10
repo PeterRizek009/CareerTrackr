@@ -10,7 +10,6 @@ import Modal from "./modal";
 
 const JobsTable = ({ jobs }) => {
 
-
     const [isOpen, setIsOpen] = useState(false);
 
 
