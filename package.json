@@ -1,6 +1,7 @@
 {
   "proxy": "https://careertrackr-backend.onrender.com",
   "name": "frontend",
+  "homepage": "https://peterrizek009.github.io/CareerTrackr/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
