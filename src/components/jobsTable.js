@@ -36,7 +36,7 @@ const JobsTable = ({ jobs }) => {
 
     const handleDelete = async () => {
         try {
-            const response = await fetch(`/api/${selectedJobId}`, {
+            const response = await fetch(`https://careertrackr-backend.onrender.com/api/${selectedJobId}`, {
                 method: 'DELETE'
             });
 
@@ -74,11 +74,11 @@ const JobsTable = ({ jobs }) => {
                 </h1>
 
                 <div className="btns flex justify-start">
-                    <button onClick={handleDelete} className="text-gray-700   bg-gray-700 dark:text-gray-400 md:text-xl shadow-md rounded-md  md:p-3 mx-2 hover:text-white p-2 hover:border-white">
+                    <button onClick={handleDelete} className="text-white   bg-gray-700 dark:text-gray-400 md:text-xl shadow-md rounded-md  md:p-3 mx-2 hover:text-white p-2 hover:border-white">
                         <RiDeleteBin5Line />
                     </button>
 
-                    <button onClick={openModal} className="text-gray-700   bg-gray-700 dark:text-gray-400 md:text-xl shadow-md rounded-md  md:p-3 mx-4 hover:text-white p-2 hover:border-white" >
+                    <button onClick={openModal} className="text-white   bg-gray-700 dark:text-gray-400 md:text-xl shadow-md rounded-md  md:p-3 mx-4 hover:text-white p-2 hover:border-white" >
                         <MdAdd />
                     </button>
 

@@ -30,10 +30,8 @@ const JobDetails = ({ jobs }) => {
         // Implement logic to update the job data using API
 
 
-
-
         try {
-            const response = await fetch(`/api/${id}`, {
+            const response = await fetch(`https://careertrackr-backend.onrender.com/api/${id}`, {
                 method: 'PATCH',
                 body: JSON.stringify({ ...jobData, gotAnReply }),
                 headers: {

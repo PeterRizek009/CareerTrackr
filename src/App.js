@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import Landing from './pages/landingpage';
 import Home from './pages/home';
 import Footer from './components/Footer';
-import GoogleLoginPage from './pages/googleLoginPage';
+import Login from './components/login';
 
 
 
@@ -19,10 +19,11 @@ function App() {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const response = await fetch('/api');
+      const response = await fetch('https://careertrackr-backend.onrender.com/api');
       const JobData = await response.json();
+    
       if (response.ok) {
-
+       console.log(JobData);
         dispatch({ type: 'SET_JOBS', payload: JobData })
 
       }
@@ -40,7 +41,7 @@ return (
         <Routes>
           <Route path='/' element={<Landing />} />
           <Route path='/CareerTrackr/' element={<Landing />} />
-          <Route path="/login" element={<GoogleLoginPage />} />
+          <Route path="/login" element={<Login />} />
           <Route path='/home' element={<Home jobs={jobs} />} />
           <Route path='/addnewjob' element={<AddNewJob />} />
           <Route path='/jobDetails/:id' element={<JobDetails jobs={jobs} />} />

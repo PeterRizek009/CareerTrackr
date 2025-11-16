@@ -28,7 +28,7 @@ const AddNewJob = ({ closeModal }) => {
 
 
         try {
-            const response = await fetch('/api', {
+            const response = await fetch('https://careertrackr-backend.onrender.com/api', {
                 method: 'POST',
                 body: JSON.stringify(job),
                 headers: {
@@ -95,7 +95,7 @@ const AddNewJob = ({ closeModal }) => {
                 >
                     <option value="">Choose thge suitable reply</option>
                     <option value={'Nothing yet'}>Nothing yet</option>
-                    <option value={'Rejection Email'}>Rejection Email</option>
+                    <option value={'Rejection Email'}>Rejection</option>
                     <option value={'Positive Email'}>Positive Email</option>
                     <option value={'Call form HR'}>got a Call</option>
                     <option value={'Interview date'}>Interview date</option>
